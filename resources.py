@@ -35,7 +35,15 @@ class CourseAPI(Resource):
   @ns.marshal_with(course_model)
   def put(self, id):
     course = Course.query.get(id)
-    return course
+    course.name = ns.payload["name"]
+    db.session.commit()
+    return course, 200
+
+  def delete(self, id):
+    course = Course.query.get(id)
+    db.session.delete(course)
+    db.session.commit()
+    return {},204
 
 @ns.route("/students")
 class StudentListAPI(Resource):
@@ -61,4 +69,13 @@ class StudentAPI(Resource):
   @ns.marshal_with(student_model)
   def put(self, id):
     student = Student.query.get(id)
-    return student
+    student.name = ns.payload["name"]
+    student.course_id = ns.payload["course_id"]
+    db.session.commit()
+    return student, 200
+
+def delete(self, id):
+  student = Student.query.get(id)
+  db.session.delete(student)
+  db.session.commit()
+  return {},204
