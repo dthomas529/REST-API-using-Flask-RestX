@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from flask-restx import Api
+from flask_restx import Api
 
-api = Api()
-db = SQLAlchemy()
+api = Api() #Instantiate function: assigned to a variable
+db = SQLAlchemy() #Instantiate function: assigned to a variable
